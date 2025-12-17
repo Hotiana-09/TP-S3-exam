@@ -17,6 +17,10 @@ class CourseController {
 		$this->app = $app;
 	}
 
+    public function home(){
+        Flight::render('home');
+    }
+
 
 	public function getAllCourse() {
 		$CourseModele = new CourseModele(Flight::db());
@@ -59,19 +63,53 @@ class CourseController {
         $CourseModele = new CourseModele(Flight::db());
         
         $data = [
-            'id_conducteur' => Flight::request()->data->id_conducteur,
-            'id_moto' => Flight::request()->data->id_moto,
-            'date_course' => Flight::request()->data->date_course,
-            'h_depart' => Flight::request()->data->h_depart,
-            'h_arrivee' => Flight::request()->data->h_arrivee,
-            'lieu_depart' => Flight::request()->data->lieu_depart,
-            'lieu_destination' => Flight::request()->data->lieu_destination,
-            'km_effectue' => Flight::request()->data->km_effectue,
-            'montant' => Flight::request()->data->montant,
-            'etat' => Flight::request()->data->etat
+            'id_conducteur' => $_POST['id_conducteur'],
+            'id_moto' => $_POST['id_moto'],
+            'date_course' => $_POST['date_course'],
+            'h_depart' => $_POST['h_depart'],
+            'h_arrivee' => $_POST['h_arrivee'],
+            'lieu_depart' => $_POST['lieu_depart'],
+            'lieu_destination' => $_POST['lieu_destination'],
+            'km_effectue' => $_POST['km_effectue'],
+            'montant' => $_POST['montant'],
+            'etat' => $_POST['etat']
         ];
         
         $CourseModele->updateCourse($id, $data);
+        Flight::redirect('/');
+    }
+
+
+    public function createCourse(){
+        $ConducteurModele = new ConducteurModele(Flight::db());
+        $MotoModele = new MotoModele(Flight::db());
+        
+        $conducteurs = $ConducteurModele->getAllConducteur();
+        $motos = $MotoModele->getAllMoto();
+        
+        Flight::render('formulaire', [
+            'conducteurs' => $conducteurs,
+            'motos' => $motos
+        ]);
+    }
+
+
+    public function insertCourse(){
+        $CourseModele = new CourseModele(Flight::db());
+        
+        $data = [
+            'id_conducteur' => $_POST['id_conducteur'],
+            'id_moto' => $_POST['id_moto'],
+            'date_course' => $_POST['date_course'],
+            'h_depart' => $_POST['h_depart'],
+            'h_arrivee' => $_POST['h_arrivee'],
+            'lieu_depart' => $_POST['lieu_depart'],
+            'lieu_destination' => $_POST['lieu_destination'],
+            'km_effectue' => $_POST['km_effectue'],
+            'montant' => $_POST['montant']
+        ];
+        
+        $CourseModele->insertCourse($data);
         Flight::redirect('/');
     }
 

@@ -3,26 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - E-commerce</title>
+    <title>Liste des Courses - Taxi</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link href="/assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/bootstrap-icons/bootstrap-icons.min.css">
+
 </head>
 <body>
-    <header>
+    <div class="hero-section">
         <div class="container">
-            <nav>
-
-            </nav>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="display-5 fw-bold mb-2">
+                        <i class="bi bi-list-ul"></i> Liste des Courses
+                    </h1>
+                    <p class="mb-0">Gérez toutes vos courses</p>
+                </div>
+                <div class="btn-group">
+                    <a href="/" class="btn btn-light btn-lg">
+                        <i class="bi bi-house"></i> Accueil
+                    </a>
+                    <a href="/liste" class="btn btn-light btn-lg">
+                        <i class="bi bi-card-checklist"></i> List
+                    </a>
+                    <a href="/create" class="btn btn-success btn-lg">
+                        <i class="bi bi-plus-circle"></i> Nouvelle Course
+                    </a>
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
 
-<main>
-    <div class="container">
-            <div class="card shadow">
-                <div class="card-body">
+    <main>
+        <div class="container pb-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped align-middle">
+                        <table class="table table-hover table-striped align-middle mb-0">
                             <thead class="table-dark">
                                 <tr>
                                     <th>ID</th>
@@ -43,6 +60,9 @@
                                         <td colspan="10" class="text-center py-5 text-muted">
                                             <i class="bi bi-inbox fs-1 d-block mb-3"></i>
                                             <p class="mb-0">Aucune course enregistrée</p>
+                                            <a href="/course/create" class="btn btn-success mt-3">
+                                                <i class="bi bi-plus-circle"></i> Créer la première course
+                                            </a>
                                         </td>
                                     </tr>
                                 <?php else: ?>
@@ -166,12 +186,12 @@
                     </div>
                 </div>
             </div>
-
+        </div>
     </main>
+
     <footer>
         <p>&copy; ETU004106 - ETU004132</p>
     </footer>
-
 
 </body>
 </html>

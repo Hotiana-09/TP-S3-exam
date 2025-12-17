@@ -3,33 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails Course #<?= $course['id_course']; ?> - E-commerce</title>
+    <title>Liste des Courses - Taxi</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link href="/assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/bootstrap-icons/bootstrap-icons.min.css">
 </head>
 <body>
-    <header>
+    <div class="hero-section">
         <div class="container">
-            <nav>
-                
-            </nav>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="display-5 fw-bold mb-2">
+                        <i class="bi bi-list-ul"></i> Détails de la course 
+                    </h1>
+                    <p class="mb-0">#<?= $course['id_course']; ?></p>
+                </div>
+                <div class="btn-group">
+                    <a href="/" class="btn btn-light btn-lg">
+                        <i class="bi bi-house"></i> Accueil
+                    </a>
+                    <a href="/liste" class="btn btn-light btn-lg">
+                        <i class="bi bi-arrow-left-short"></i> Retour Liste
+                    </a>
+                    <a href="/course/create" class="btn btn-success btn-lg">
+                        <i class="bi bi-plus-circle"></i> Nouvelle Course
+                    </a>
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
 
     <main>
         <div class="container py-4">
-            <!-- En-tête avec bouton retour -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mb-0">
-                    <i class="bi bi-file-text text-primary"></i>
-                    Détails de la course #<?= $course['id_course']; ?>
-                </h2>
-                <a href="/" class="btn btn-outline-secondary">
-                    <i class="bi bi-arrow-left"></i> Retour à la liste
-                </a>
-            </div>
-
             <?php
                 $badge_class = match($course['etat']) {
                     'insere' => 'bg-secondary',
@@ -47,7 +52,7 @@
 
             <!-- Carte principale -->
             <div class="card shadow mb-4">
-                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <div class="card-header text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
                         <i class="bi bi-info-circle"></i> Informations générales
                     </h5>

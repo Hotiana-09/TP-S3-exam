@@ -135,20 +135,19 @@ Taxi Moto Gestion :
         * Formulaire Ajout Course : 
             * Modele :
                 ☐ CourseModele
-                    _ insertCourse <==>  etat == insere (par defaut)
+                    ✔ insertCourse <==>  etat == insere (par defaut) @done(25-12-17 21:39)
 
                 ☐  ConducteurModele
-                    _ getAllConducteur
 
                 ☐  MotoModele
-                    _ getAllMotos
                 
             * Controller : 
                 ☐  CourseController
-                    _ addCourse
+                    ✔ createCourse(formulaire) @done(25-12-17 22:45)
+                    ✔  addCourse @done(25-12-17 22:45)
 
             * View : 
-                ☐ Formulaire.php
+                ✔ Formulaire.php @done(25-12-17 22:45)
                     _ liste deroulante des motos 
                     _ liste deroulante des conducteurs
                     _ insert date 
@@ -160,7 +159,8 @@ Taxi Moto Gestion :
                     _ montant 
 
             * Route :
-                _ "/formulaire" => render formulaire.php
+                 ✔ "/create" => render formulaire.php @done(25-12-17 22:46)
+                 ✔ "/insert" => inserer les donnees @done(25-12-17 22:47)
 
 
 
