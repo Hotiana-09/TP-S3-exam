@@ -1,0 +1,168 @@
+Taxi Moto Gestion :
+    * Database "TaxiMotoGestion" : 
+    
+        ☐ Creation table
+            ✔ moto @done(25-12-17 09:43)
+                _ id_moto
+                _ marque
+                _ id_carburant
+
+            ✔ conducteur @done(25-12-17 09:43)
+                _ id_conducteur
+                _ nom
+                _ prenom
+        
+            ✔ course @done(25-12-17 09:55)
+                _ id_course
+                _ id_moto
+                _ id_conducteur
+                _ h_depart
+                _ date_depart
+                _ lieu_depart
+                _ h_arrivee
+                _ date_arrivee
+                _ lieu_arrivee
+                _ km_effectue
+                _ montant
+                _ etat 
+
+            ✔ consommation_moto @done(25-12-17 09:44)
+                _ id_moto
+                _ consommation
+            
+            ✔ carburant @done(25-12-17 09:43)
+                _ id_carburant
+                _ type 
+                _ prix
+
+            ✔ salaire_conducteur @done(25-12-17 09:58)
+                _ id_conducteur
+                _ id_recette
+                _ pourcentage
+
+            ✔ entretien_moto @done(25-12-17 09:58)
+                _ id_moto
+                _ id_recette
+                _ pourcentage
+
+        
+        ✔ Insertion Donnees test @done(25-12-17 10:33)
+    
+    
+    * Gestion des courses :
+        * Actions : 
+            _ création
+            _ modification
+            _ validation (une course validée ne peut plus être modifier)
+
+        * Liste Courses : 
+            * Base : 
+                ✔ Création view => course + conducteur + moto @done(25-12-17 11:33)
+            * Modele :
+                ☐ CourseModele
+                    ✔ _function cree un view @done(25-12-17 11:45)
+                    ✔ _getAllCourse @done(25-12-17 11:45)
+                        . usage de
+                
+            * Controller : 
+                ✔  CourseController @done(25-12-17 11:54)
+                    _ getAllCourse
+
+            * View : 
+                ✔ liste.php (table) @done(25-12-17 13:01)
+                    _ date_course
+                    _ conducteur
+                    _ modele de la moto
+                    _ heure_debut 
+                    _ heure_fin
+                    _ lieu_depart
+                    _ lieu_destination
+                    _ bouton info => edition
+                    
+
+            * Route :
+                ✔ "/liste" => render liste.php @done(25-12-17 13:02)
+                
+        * Validation : 
+            * Modele :
+                ✔ CourseModele @done(25-12-17 13:37)
+                    _ updateCourse // changement etat
+                    _ insertValidCourse
+
+            * Controller : 
+                ✔  CourseController @done(25-12-17 13:37)
+                    _ validateCourse
+                
+            * View : 
+                ✔ liste.php @done(25-12-17 13:37)
+                    ✔ Ajout bouton valide @done(25-12-17 13:42)
+                    ✔ Ajout zone comme formulaire pour inserer les modifs @done(25-12-17 13:42)
+
+            * Route :
+                ✔ "/course/@id" => render fiche.php @done(25-12-17 13:38)
+
+
+        * Edit Courses : 
+            * Modele :
+                ☐ CourseModele
+                    _ updateCourse
+                
+            * Controller : 
+                ☐  CourseController
+                    _ updateCourse
+
+            * View : 
+                ☐ fiche.php (table)
+                    ☐ Affichage fiche de la course
+                    ☐ Ajout zone comme formulaire pour inserer les modifs
+
+            * Route :
+                _ "/course/@id" => render fiche.php
+
+
+
+        * Formulaire Ajout Course : 
+            * Modele :
+                ☐ CourseModele
+                    _ insertCourse <==>  etat == insere (par defaut)
+
+                ☐  ConducteurModele
+                    _ getAllConducteur
+
+                ☐  MotoModele
+                    _ getAllMotos
+                
+            * Controller : 
+                ☐  CourseController
+                    _ addCourse
+
+            * View : 
+                ☐ Formulaire.php
+                    _ liste deroulante des motos 
+                    _ liste deroulante des conducteurs
+                    _ insert date 
+                    _ insert heure_debut
+                    _ insert lieu_debut
+                    _ insert heure_fin
+                    _ insert lieu_destination
+                    _ insert kilometrage
+                    _ montant 
+
+            * Route :
+                _ "/formulaire" => render formulaire.php
+
+
+
+
+
+
+    * afficher une liste avec les colonnes suivants :
+            _ date 
+            _ recette (montant) 
+            _ dépense ( salaire + entretien)
+            _ bénéfice
+            _ mettre le total des recettes , dépenses et bénéfice en haut du tableau
+
+
+
+
