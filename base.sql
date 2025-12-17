@@ -178,7 +178,7 @@ INSERT INTO taxi_course (id_moto, id_conducteur, date_course, h_depart, lieu_dep
 CREATE OR REPLACE VIEW taxi_v_course_lib AS 
 SELECT
 cod.nom nom_conducteur,cod.prenom prenom_conducteur, m.marque, m.immatriculation,
-cs.date_course, cs.h_depart, cs.h_arrivee, cs.lieu_depart, cs.lieu_destination, cs.km_effectue, cs.montant, cs.etat
+cs.date_course, cs.h_depart, cs.h_arrivee, cs.lieu_depart, cs.lieu_destination, cs.km_effectue, cs.montant, cs.etat , cs.id_course
 FROM taxi_course cs
 LEFT JOIN taxi_conducteur cod
 ON cs.id_conducteur = cod.id_conducteur
@@ -193,3 +193,18 @@ order by date_course;
 UPDATE taxi_course
 SET etat = 'valide'
 WHERE id_course = 1;
+
+SELECT *
+FROM taxi_v_course_lib 
+WHERE id_course = 1;
+
+
+CREATE OR REPLACE VIEW v_moto_all_lib AS
+SELECT
+m.id_moto, m.marque, m.immatriculation,
+car.type, car.prix, cm.consommation_par_100km
+FROM taxi_moto m
+LEFT JOIN taxi_carburant car
+ON m.id_carburant = car.id_carburant
+LEFT JOIN taxi_consommation_moto cm
+ON cm.id_moto = m.id_moto

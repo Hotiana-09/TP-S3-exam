@@ -66,8 +66,14 @@ use app\config\Database;
 
 
         public function getSingleCourseLib($id){
+            $sql = "SELECT * ".
+                    "FROM taxi_v_course_lib ".
+                    "WHERE id_course = ? ;";
             
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]); 
+            return $stmt->fetch();
         }
-}
+    }
 
 ?> 

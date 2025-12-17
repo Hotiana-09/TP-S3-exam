@@ -28,6 +28,12 @@ class CourseController {
 		Flight::redirect('/');
 	}
 
+	public function getSingleCourseLib($id){
+		$CourseModele = new CourseModele(Flight::db());
+		$select_course = $CourseModele->getSingleCourseLib($id);
+		Flight::render('fiche', ['course' => $select_course]);
+	}
+
 
 
 
