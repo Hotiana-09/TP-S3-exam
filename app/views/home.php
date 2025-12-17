@@ -13,7 +13,7 @@
         <div class="container">
             <div class="text-center">
                 <h1 class="display-3 fw-bold mb-3">
-                    <i class="bi bi-taxi-front"></i> Gestion Taxi
+                    <i class="bi bi-taxi-front"></i> Gestion Taxi Moto
                 </h1>
                 <p class="lead mb-0">
                     Système de gestion des courses et bénéfices
