@@ -107,7 +107,7 @@ Taxi Moto Gestion :
                 ☐ CourseModele
                     ✔ getSingleCourse @done(25-12-17 14:12)
                         _ prendre id_course
-                    ☐ updateCourse
+                    ✔ updateCourse @done(25-12-17 15:52)
 
                 ☐ MotoModele
                     ✔ create_v_moto_all_lib @done(25-12-17 15:08)
@@ -118,7 +118,7 @@ Taxi Moto Gestion :
                 
             * Controller : 
                 ☐  CourseController
-                    _ updateCourse
+                    ✔ updateCourse @done(25-12-17 15:52)
 
             * View : 
                 ☐ fiche.php (table)
@@ -129,6 +129,8 @@ Taxi Moto Gestion :
                  ✔ "/course/@id" => render fiche.php @done(25-12-17 15:42)
 
 
+        
+        -- usage de post et non de get lors des methodes (edit et update)
 
         * Formulaire Ajout Course : 
             * Modele :

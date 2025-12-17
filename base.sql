@@ -177,7 +177,7 @@ INSERT INTO taxi_course (id_moto, id_conducteur, date_course, h_depart, lieu_dep
 
 CREATE OR REPLACE VIEW taxi_v_course_lib AS 
 SELECT
-cod.nom nom_conducteur,cod.prenom prenom_conducteur, m.marque, m.immatriculation,
+cod.id_conducteur, cod.nom nom_conducteur,cod.prenom prenom_conducteur, m.marque, m.immatriculation,m.id_moto,
 cs.date_course, cs.h_depart, cs.h_arrivee, cs.lieu_depart, cs.lieu_destination, cs.km_effectue, cs.montant, cs.etat , cs.id_course
 FROM taxi_course cs
 LEFT JOIN taxi_conducteur cod
@@ -199,7 +199,7 @@ FROM taxi_v_course_lib
 WHERE id_course = 1;
 
 
-CREATE OR REPLACE VIEW v_moto_all_lib AS
+CREATE OR REPLACE VIEW taxi_v_moto_all_lib AS
 SELECT
 m.id_moto, m.marque, m.immatriculation,
 car.type, car.prix, cm.consommation_par_100km
@@ -207,4 +207,12 @@ FROM taxi_moto m
 LEFT JOIN taxi_carburant car
 ON m.id_carburant = car.id_carburant
 LEFT JOIN taxi_consommation_moto cm
-ON cm.id_moto = m.id_moto
+ON cm.id_moto = m.id_moto;
+
+
+CREATE OR REPLACE VIEW taxi_v_conducteur_all_lib AS
+SELECT 
+cond.id_conducteur,cond.nom, cond.prenom, slcond.pourcentage
+FROM taxi_conducteur cond
+LEFT JOIN taxi_salaire_conducteur slcond
+ON cond.id_conducteur = slcond.id_conducteur;
