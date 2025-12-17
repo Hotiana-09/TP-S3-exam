@@ -29,4 +29,3 @@ $router->group('', function(Router $router) use ($app) {
 
 
 }, [ SecurityHeadersMiddleware::class ]);
-
