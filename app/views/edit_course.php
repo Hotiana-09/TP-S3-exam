@@ -89,21 +89,6 @@
                             </div>
 
                             <!-- État -->
-                            <?php
-                                $badge_class = match($course['etat']) {
-                                    'insere' => 'bg-secondary',
-                                    'termine' => 'bg-warning text-dark',
-                                    'valide' => 'bg-success',
-                                    default => 'bg-secondary'
-                                };
-                                $etat_label = match($course['etat']) {
-                                    'insere' => 'Insérée',
-                                    'termine' => 'Terminée',
-                                    'valide' => 'Validée',
-                                    default => $course['etat']
-                                };
-                            ?>
-
                             <div class="col-md-6">
                                 <div class="p-3 bg-light rounded">
                                     <h6 class="text-muted mb-2">

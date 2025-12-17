@@ -76,6 +76,35 @@ use app\config\Database;
         }
 
 
+        public function updateCourse($id, $data) {
+            $sql = "UPDATE taxi_course SET 
+                    id_conducteur = ?,
+                    id_moto = ?,
+                    date_course = ?,
+                    h_depart = ?,
+                    h_arrivee = ?,
+                    lieu_depart = ?,
+                    lieu_destination = ?,
+                    km_effectue = ?,
+                    montant = ?,
+                    etat = ?
+                    WHERE id_course = ?";
+            
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                $data['id_conducteur'],
+                $data['id_moto'],
+                $data['date_course'],
+                $data['h_depart'],
+                $data['h_arrivee'],
+                $data['lieu_depart'],
+                $data['lieu_destination'],
+                $data['km_effectue'],
+                $data['montant'],
+                $data['etat'],
+                $id
+            ]);
+        }
 
     }
 

@@ -18,5 +18,6 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/course/valide/@id', [ $CourseController, 'valide_course']);
 	$router->get('/course/view/@id', [ $CourseController, 'getSingleCourseLib']);
 	$router->get('/course/edit/@id', [ $CourseController, 'editCourse']);	
+	$router->post('/course/update/@id', [ $CourseController, 'updateCourse']);	
 	
 }, [ SecurityHeadersMiddleware::class ]);
