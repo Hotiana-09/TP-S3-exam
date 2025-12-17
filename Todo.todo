@@ -105,7 +105,16 @@ Taxi Moto Gestion :
         * Edit Courses : 
             * Modele :
                 ☐ CourseModele
-                    _ updateCourse
+                    ✔ getSingleCourse @done(25-12-17 14:12)
+                        _ prendre id_course
+                    ☐ updateCourse
+
+                ☐ MotoModele
+                    ✔ create_v_moto_all_lib @done(25-12-17 15:08)
+                    ✔ getAllMoto @done(25-12-17 15:08)
+                ☐ ConducteurModele
+                    ✔ create_v_conducteur_all_lib @done(25-12-17 15:08)
+                    ✔ getAllConducteur @done(25-12-17 15:07)
                 
             * Controller : 
                 ☐  CourseController
@@ -113,11 +122,11 @@ Taxi Moto Gestion :
 
             * View : 
                 ☐ fiche.php (table)
-                    ☐ Affichage fiche de la course
-                    ☐ Ajout zone comme formulaire pour inserer les modifs
+                    ✔ Affichage fiche de la course @done(25-12-17 15:42)
+                    ✔ Ajout zone comme formulaire pour inserer les modifs @done(25-12-17 15:42)
 
             * Route :
-                _ "/course/@id" => render fiche.php
+                 ✔ "/course/@id" => render fiche.php @done(25-12-17 15:42)
 
 
 

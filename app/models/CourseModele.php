@@ -15,7 +15,7 @@ use app\config\Database;
         public function create_v_course_all_lib(){
             $sql = "CREATE OR REPLACE VIEW taxi_v_course_lib AS ".
                    "SELECT ".
-                   "cod.nom nom_conducteur,cod.prenom prenom_conducteur, m.marque, m.immatriculation,".
+                   "cod.id_conducteur, cod.nom nom_conducteur,cod.prenom prenom_conducteur, m.marque, m.immatriculation,m.id_moto, ".
                    "cs.date_course, cs.h_depart, cs.h_arrivee, cs.lieu_depart, cs.lieu_destination, cs.km_effectue, cs.montant, cs.etat, cs.id_course ".
                    "FROM taxi_course cs ".
                    "LEFT JOIN taxi_conducteur cod ".
@@ -74,6 +74,9 @@ use app\config\Database;
             $stmt->execute([$id]); 
             return $stmt->fetch();
         }
+
+
+
     }
 
 ?> 

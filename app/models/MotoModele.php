@@ -14,27 +14,29 @@ use app\config\Database;
 
         
         public function create_v_moto_all_lib(){
-            $sql = "CREATE OR REPLACE VIEW v_moto_all_lib AS ".
+            $sql = "CREATE OR REPLACE VIEW taxi_v_moto_all_lib AS ".
                    "SELECT ".
                    "m.id_moto, m.marque, m.immatriculation, ".
-                   "car.type, car.prix ".
+                   "car.type, car.prix, cm.consommation_par_100km ".
                    "FROM taxi_moto m ".
                    "LEFT JOIN taxi_carburant car ".
-                   "ON m.id_carburant = car.id_carburant";
+                   "ON m.id_carburant = car.id_carburant ".
+                   "LEFT JOIN taxi_consommation_moto cm ".
+                   "ON cm.id_moto = m.id_moto;";
 
             $stmt = $this->db->query($sql);
         }
         
         public function getAllMoto() {
-            $course = array();
+            $moto = array();
             $this->create_v_moto_all_lib();
             $sql = "SELECT * ".
-                    "FROM taxi_moto ".
+                    "FROM taxi_v_moto_all_lib ".
                     "order by id_moto;";
 
             $stmt = $this->db->query($sql);
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $course[] = array(
+                $moto[] = array(
                     'id' => $row['id_moto'],
                     'marque_moto' => $row['marque'],
                     'immatriculation' => $row['immatriculation'],
@@ -43,7 +45,7 @@ use app\config\Database;
                 );
             }
 
-            return $course;
+            return $moto;
         }
 
 

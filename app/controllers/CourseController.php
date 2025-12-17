@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\CourseModele;
+use app\models\ConducteurModele;
+use app\models\MotoModele;
 use Flight;
 use flight\Engine;
 
@@ -34,6 +36,23 @@ class CourseController {
 		Flight::render('fiche', ['course' => $select_course]);
 	}
 
+
+	public function editCourse($id){
+        $CourseModele = new CourseModele(Flight::db());
+        $ConducteurModele = new ConducteurModele(Flight::db());
+        $MotoModele = new MotoModele(Flight::db());
+        
+        $course = $CourseModele->getSingleCourseLib($id);
+        
+        $conducteurs = $ConducteurModele->getAllConducteur();
+        $motos = $MotoModele->getAllMoto();
+        
+        Flight::render('edit_course', [
+            'course' => $course,
+            'conducteurs' => $conducteurs,
+            'motos' => $motos
+        ]);
+    }
 
 
 
