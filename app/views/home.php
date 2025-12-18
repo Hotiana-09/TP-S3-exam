@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <a href="/benefices" class="text-decoration-none">
+                    <a href="/finance" class="text-decoration-none">
                         <div class="action-card card info shadow-lg">
                             <div class="card-body">
                                 <i class="bi bi-graph-up-arrow action-icon"></i>

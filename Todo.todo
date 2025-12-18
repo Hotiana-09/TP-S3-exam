@@ -174,8 +174,9 @@ Taxi Moto Gestion :
             + bénéfice
             + mettre le total des recettes , dépenses et bénéfice en haut du tableau
 
-        * Base :
-
-
-
-
+        * Base :  
+            +crée des view
+                +taxi_v_course_finance(taxi_course, taxi_salaire_conducteur,taxi_Carburant
+                taxi_entretien_moto, taxi_consommation_moto , calcule) 
+                +taxi_v_resume_journalier(taxi_v_course_finance, calcule SUM)
+                +taxi_v_resume_total(taxi_v_course_finance, calcule SUM)
