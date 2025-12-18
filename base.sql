@@ -38,6 +38,7 @@ CREATE TABLE taxi_course (
     lieu_destination VARCHAR(200) NOT NULL,
     km_effectue DECIMAL(8,2) NOT NULL,
     montant DECIMAL(10,2) NOT NULL,
+    essence DECIMAL(10,2) NOT NULL, 
     etat ENUM('insere', 'termine', 'valide') DEFAULT 'insere',
     FOREIGN KEY (id_moto) REFERENCES taxi_moto(id_moto),
     FOREIGN KEY (id_conducteur) REFERENCES taxi_conducteur(id_conducteur)
@@ -76,6 +77,10 @@ CREATE TABLE taxi_course_valide(
     FOREIGN KEY (id_conducteur) REFERENCES taxi_conducteur(id_conducteur)
 );
 
+
+
+
+
 -- DONNÉES
 -- taxi_Carburant
 INSERT INTO taxi_carburant (type, prix) VALUES
@@ -88,7 +93,9 @@ INSERT INTO taxi_conducteur (nom, prenom) VALUES
 ('RAKOTO', 'Jean'),
 ('RABE', 'Paul'),
 ('RAMANANTSOA', 'Claire'),
-('RASOAMANANA', 'David');
+('RASOA', 'Soa'),
+('TOMEFY', 'Lou'),
+('JEAN', 'Pascal');
 
 -- taxi_Moto (les IDs AUTO_INCREMENT seront : 1, 2, 3, 4, 5, 6)
 INSERT INTO taxi_moto (marque, immatriculation, id_carburant) VALUES
@@ -98,29 +105,41 @@ INSERT INTO taxi_moto (marque, immatriculation, id_carburant) VALUES
 ('Yamaha R15 V3', '2235 TAA', 2),      -- id_moto = 4
 ('TVS Apache RTR', '3236 TAA', 3),     -- id_moto = 5
 ('Hero Splendor Plus', '3237 TAA', 3); -- id_moto = 6
+('Honda CB500F', '1298 TAA', 2),       -- id_moto = 3
+('Yamaha R15 V3', '2319 TAA', 2),      -- id_moto = 4
+('TVS Apache RTR', '5432 TAA', 3),     -- id_moto = 5
+('Hero Splendor Plus', '2020 TAA', 3); -- id_moto = 6
 
 -- taxi_Consommation_moto (CORRIGÉ : utiliser les bons IDs)
 INSERT INTO taxi_consommation_moto (id_moto, consommation_par_100km) VALUES
-(1, 2.3),   -- Honda CBR
-(2, 2.5),   -- Yamaha MT
-(3, 3.5),   -- Honda CB500 (CORRIGÉ : était 5)
-(4, 3.0),   -- Yamaha R15 (CORRIGÉ : était 6)
+(1, 2.0),   -- Honda CBR
+(2, 2.0),   -- Yamaha MT
+(3, 2.0),   -- Honda CB500 (CORRIGÉ : était 5)
+(4, 2.0),   -- Yamaha R15 (CORRIGÉ : était 6)
 (5, 1.6),   -- TVS (CORRIGÉ : était 11)
-(6, 1.4);   -- Hero (CORRIGÉ : était 12)
+(6, 1.6);   -- Hero (CORRIGÉ : était 12)(3, 1.6),   -- Honda CB500 (CORRIGÉ : était 5)
+(7, 1.3),   -- TVS (CORRIGÉ : était 11)
+(8, 1.3); 
+(9, 1.3),   -- TVS (CORRIGÉ : était 11)
+(10, 1.3);
+
 
 -- taxi_Salaire_conducteur (CORRIGÉ : utiliser les bons IDs taxi_conducteur)
 INSERT INTO taxi_salaire_conducteur (id_conducteur, date_debut, date_fin, pourcentage) VALUES
 -- RAKOTO Jean (id=1) : 42%
-(1, '2024-12-16', NULL, 42.00),
-
+(1, '2024-12-16', NULL, 10.00),
 -- RABE Paul (id=2) : 45%
-(2, '2024-11-01', NULL, 45.00),
-
+(2, '2024-11-01', NULL, 10.00),
 -- RAMANANTSOA Claire (id=3, CORRIGÉ : était 7) : 44%
-(3, '2024-11-01', NULL, 44.00),
-
+(3, '2024-11-01', NULL, 10.00),
 -- RASOAMANANA David (id=4, CORRIGÉ : était 8) : 43%
-(4, '2024-12-13', NULL, 43.00);
+(4, '2024-12-13', NULL, 10.00);
+(5, '2024-12-13', NULL, 15.00);
+(6, '2024-12-13', NULL, 15.00);
+(7, '2024-12-13', NULL, 11.50);
+(8, '2024-12-13', NULL, 11.50)
+(9, '2024-12-13', NULL, 11.50);
+(10, '2024-12-13', NULL, 11.50);
 
 -- taxi_Entretien_moto (CORRIGÉ : utiliser les bons IDs taxi_moto)
 INSERT INTO taxi_entretien_moto (id_moto, date_debut, date_fin, pourcentage) VALUES
@@ -256,4 +275,6 @@ SELECT
     SUM(salaire + entretien + carburant) AS depense_totale,
     SUM(recette - (salaire + entretien + carburant)) AS benefice_total
 FROM taxi_v_course_finance;
+
+
 

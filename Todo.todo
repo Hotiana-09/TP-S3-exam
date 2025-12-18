@@ -184,3 +184,9 @@ Taxi Moto Gestion :
         *view :resume.php
             +tableau des benefices, dépense, recette et date _une ligne = une date
             +tableau sommant les benefice total, dépense total, recette total de tous les dates
+
+
+    partie 2 
+    *changer le Database
+    *créer une page pour effacer toutes les courses (même validé)
+    *mettre une filtre date_debut et date de fin
