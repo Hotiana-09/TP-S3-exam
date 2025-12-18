@@ -216,3 +216,44 @@ cond.id_conducteur,cond.nom, cond.prenom, slcond.pourcentage
 FROM taxi_conducteur cond
 LEFT JOIN taxi_salaire_conducteur slcond
 ON cond.id_conducteur = slcond.id_conducteur;
+
+
+CREATE OR REPLACE VIEW taxi_v_course_finance AS
+SELECT
+    c.id_course,
+    c.date_course,
+    c.montant AS recette,
+    (c.montant * sc.pourcentage / 100) AS salaire,
+    (c.montant * em.pourcentage / 100) AS entretien,
+    (
+        (c.km_effectue * cm.consommation_par_100km / 100)
+        * carb.prix
+    ) AS carburant
+FROM taxi_course c
+JOIN taxi_salaire_conducteur sc
+    ON sc.id_conducteur = c.id_conducteur
+    AND c.date_course BETWEEN sc.date_debut AND IFNULL(sc.date_fin, c.date_course)
+JOIN taxi_entretien_moto em
+    ON em.id_moto = c.id_moto
+    AND c.date_course BETWEEN em.date_debut AND IFNULL(em.date_fin, c.date_course)
+JOIN taxi_moto m ON m.id_moto = c.id_moto
+JOIN taxi_consommation_moto cm ON cm.id_moto = m.id_moto
+JOIN taxi_carburant carb ON carb.id_carburant = m.id_carburant
+WHERE c.etat = 'valide';
+
+CREATE OR REPLACE VIEW taxi_v_resume_journalier AS
+SELECT
+    date_course AS date,
+    SUM(recette) AS recette,
+    SUM(salaire + entretien + carburant) AS depense,
+    SUM(recette - (salaire + entretien + carburant)) AS benefice
+FROM taxi_v_course_finance
+GROUP BY date_course;
+
+CREATE OR REPLACE VIEW taxi_v_resume_total AS
+SELECT
+    SUM(recette) AS recette_totale,
+    SUM(salaire + entretien + carburant) AS depense_totale,
+    SUM(recette - (salaire + entretien + carburant)) AS benefice_total
+FROM taxi_v_course_finance;
+
