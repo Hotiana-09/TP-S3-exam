@@ -83,44 +83,6 @@
                     </a>
                 </div>
             </div>
-
-
-            <div class="card shadow border-0">
-                <div class="card-body p-4">
-                    <h5 class="card-title mb-4">
-                        <i class="bi bi-lightbulb text-warning"></i> Guide rapide
-                    </h5>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="d-flex align-items-start">
-                                <span class="badge bg-primary rounded-circle me-3" style="width: 30px; height: 30px; padding-top: 7px;">1</span>
-                                <div>
-                                    <strong>Créer une course</strong>
-                                    <p class="text-muted small mb-0">Enregistrez les détails de chaque trajet effectué</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="d-flex align-items-start">
-                                <span class="badge bg-primary rounded-circle me-3" style="width: 30px; height: 30px; padding-top: 7px;">2</span>
-                                <div>
-                                    <strong>Gérer les courses</strong>
-                                    <p class="text-muted small mb-0">Modifiez ou validez les courses dans la liste</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="d-flex align-items-start">
-                                <span class="badge bg-primary rounded-circle me-3" style="width: 30px; height: 30px; padding-top: 7px;">3</span>
-                                <div>
-                                    <strong>Analyser les bénéfices</strong>
-                                    <p class="text-muted small mb-0">Consultez vos statistiques et revenus</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
