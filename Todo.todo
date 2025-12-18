@@ -177,6 +177,10 @@ Taxi Moto Gestion :
         * Base :  
             +crée des view
                 +taxi_v_course_finance(taxi_course, taxi_salaire_conducteur,taxi_Carburant
-                taxi_entretien_moto, taxi_consommation_moto , calcule) 
+                taxi_entretien_moto, taxi_consommation_moto , calcule SUM coruse validé)  
                 +taxi_v_resume_journalier(taxi_v_course_finance, calcule SUM)
                 +taxi_v_resume_total(taxi_v_course_finance, calcule SUM)
+
+        *view :resume.php
+            +tableau des benefices, dépense, recette et date _une ligne = une date
+            +tableau sommant les benefice total, dépense total, recette total de tous les dates
