@@ -1,44 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Courses - Taxi</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link href="/assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/bootstrap-icons/bootstrap-icons.min.css">
 
-</head>
-<body>
-    <div class="hero-section">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="display-5 fw-bold mb-2">
-                        <i class="bi bi-list-ul"></i> Liste des Courses
-                    </h1>
-                    <p class="mb-0">Gérez toutes vos courses</p>
-                </div>
-                <div class="btn-group">
-                    <a href="/" class="btn btn-light btn-lg">
-                        <i class="bi bi-house"></i> Accueil
-                    </a>
-                    <a href="/course/create" class="btn btn-success btn-lg">
-                        <i class="bi bi-plus-circle"></i> Nouvelle Course
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
     <main>
         <div class="container py-4">
             <form method="POST" action="/insert">
                 <!-- En-tête -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">
-                        <i class="bi bi-plus-circle text-success"></i>
-                        Nouvelle course
-                    </h2>
                     <div class="btn-group">
                         <a href="/" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left"></i> Annuler
@@ -277,10 +242,3 @@
 
         </div>
     </main>
-
-    <footer>
-        <p>&copy; ETU004106 - ETU004132</p>
-    </footer>
-
-</body>
-</html>
