@@ -15,6 +15,7 @@
                                     <th>Horaires</th>
                                     <th class="text-end">Distance</th>
                                     <th class="text-end">Montant</th>
+                                    <th class="text-end">Carburant</th>
                                     <th>État</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -83,6 +84,9 @@
                                             
                                             <td class="text-end fw-bold">
                                                 <?= number_format($course['montant_paye'], 0, ',', ' '); ?> Ar
+                                            </td>                                            
+                                            <td class="text-end fw-bold">
+                                                <?= number_format($course['montant_essence'], 0, ',', ' '); ?> Ar
                                             </td>
                                             
                                             <td>

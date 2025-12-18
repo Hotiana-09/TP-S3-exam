@@ -31,6 +31,8 @@ $router->group('', function(Router $router) use ($app) {
 	$router->post('/insert', [ $CourseController, 'insertCourse']);
 	$router->get('/finance', [ $FinanceController, 'index']);
 
+	$router->get('/editEssence', [ $CourseController, 'editEssence']);
+	$router->post('/insertEssence', [ $CourseController, 'insertEssence']);
 
 }, [ SecurityHeadersMiddleware::class ]);
 

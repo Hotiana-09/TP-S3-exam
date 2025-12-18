@@ -16,7 +16,7 @@ use app\config\Database;
             $sql = "CREATE OR REPLACE VIEW taxi_v_course_lib AS ".
                    "SELECT ".
                    "cod.id_conducteur, cod.nom nom_conducteur,cod.prenom prenom_conducteur, m.marque, m.immatriculation,m.id_moto, ".
-                   "cs.date_course, cs.h_depart, cs.h_arrivee, cs.lieu_depart, cs.lieu_destination, cs.km_effectue, cs.montant, cs.etat, cs.id_course ".
+                   "cs.date_course, cs.h_depart, cs.h_arrivee, cs.lieu_depart, cs.lieu_destination, cs.km_effectue, cs.montant, cs.essence, cs.etat, cs.id_course ".
                    "FROM taxi_course cs ".
                    "LEFT JOIN taxi_conducteur cod ".
                    "ON cs.id_conducteur = cod.id_conducteur ".
@@ -46,6 +46,7 @@ use app\config\Database;
                     'lieu_destination' => $row['lieu_destination'],
                     'km_effectue' => $row['km_effectue'],
                     'montant_paye' => $row['montant'],
+                    'montant_essence' => $row['essence'],
                     'etat' => $row['etat'],
                     'prenom_conducteur' => $row['prenom_conducteur']
                 );
@@ -107,7 +108,32 @@ use app\config\Database;
         }
 
 
+        public function get_actual_essence() {
+            $sql = "SELECT prix FROM taxi_carburant ORDER BY id_carburant DESC LIMIT 1;";
+            $stmt = $this->db->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['prix']; 
+        }
+
+        public function get_consommation_moto($id) {
+            $sql = "SELECT consommation_par_100km FROM taxi_consommation_moto WHERE id_moto = ?;";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]); 
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['consommation_par_100km']; 
+        }
+
+        public function getPrixEssenceCourse($id_moto, $km_effectue) {
+            $actual_essence = $this->get_actual_essence();
+            $consommation_moto = $this->get_consommation_moto($id_moto); 
+            
+            return ($km_effectue * $consommation_moto / 100) * $actual_essence;
+        }
+
+
         public function insertCourse($data) {
+            $montant_essence = $this->getPrixEssenceCourse($data['id_moto'], $data['km_effectue']);
+
             $sql = "INSERT INTO taxi_course (
                         id_conducteur,
                         id_moto,
@@ -118,8 +144,9 @@ use app\config\Database;
                         lieu_destination,
                         km_effectue,
                         montant,
+                        essence,
                         etat
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'insere')";
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'insere')";
             
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
@@ -131,8 +158,16 @@ use app\config\Database;
                 $data['lieu_depart'],
                 $data['lieu_destination'],
                 $data['km_effectue'],
-                $data['montant']
+                $data['montant'],
+                $montant_essence
             ]);
+        }
+
+
+        public function insertEssence($prixEssence) {
+            $sql = "INSERT INTO taxi_carburant (type, prix) VALUES ('essence', ?);";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$prixEssence]); 
         }
 
     }

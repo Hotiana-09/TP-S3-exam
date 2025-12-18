@@ -16,6 +16,12 @@ class CourseController {
     public function home(){
         Flight::render('home');
     }
+
+    public function editEssence(){
+        $this->app->render('layout', [
+            'page' => 'editEssence.php',
+        ]);    
+    }
     
     public function getAllCourse() {
         $CourseModele = new CourseModele(Flight::db());
@@ -109,6 +115,14 @@ class CourseController {
         
         $CourseModele->insertCourse($data);
         Flight::redirect('/liste');
+    }
+
+
+    public function insertEssence(){
+        $CourseModele = new CourseModele(Flight::db());
+        $prixEssence = $_POST['prix'];
+        $CourseModele->insertEssence($prixEssence);
+        Flight::redirect('/');
     }
 }
 ?>
