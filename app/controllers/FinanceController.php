@@ -10,7 +10,8 @@ class FinanceController {
         $resume = FinanceModele::getResumeJournalier();
         $totaux = FinanceModele::getTotaux();
 
-        Flight::render('resume', [
+        Flight::render('layout', [
+            'page' => 'resume.php',
             'resume' => $resume,
             'totaux' => $totaux
         ]);
