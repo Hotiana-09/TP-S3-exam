@@ -113,7 +113,7 @@
                         <div class="card shadow h-100">
                             <div class="card-header bg-info text-white">
                                 <h5 class="mb-0">
-                                    <i class="bi bi-bicycle"></i> Véhicule
+                                    <i class="bi bi-bicycle"></i> Moto
                                 </h5>
                             </div>
                             <div class="card-body">
