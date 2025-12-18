@@ -23,6 +23,12 @@ class CourseController {
         ]);    
     }
     
+    public function vider_list(){
+        $this->app->render('layout', [
+            'page' => 'vide_list.php',
+        ]);    
+    }
+
     public function getAllCourse() {
         $CourseModele = new CourseModele(Flight::db());
         $all_course = $CourseModele->getAllCourse();

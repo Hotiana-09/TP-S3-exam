@@ -30,6 +30,9 @@
                     </a>
                     <a href="/create" class="btn btn-success btn-lg">
                         <i class="bi bi-plus-circle"></i> Nouvelle Course
+                    </a>                    
+                    <a href="/vider" class="btn btn-alert btn-lg">
+                        <i class="bi bi-trash3"></i> Vider Liste
                     </a>
                 </div>
             </div>

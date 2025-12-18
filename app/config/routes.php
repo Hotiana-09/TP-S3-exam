@@ -34,5 +34,8 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/editEssence', [ $CourseController, 'editEssence']);
 	$router->post('/insertEssence', [ $CourseController, 'insertEssence']);
 
+	$router->get('/vider', [ $CourseController, 'vider_list']);
+	$router->post('/vider/confirme', [ $CourseController, 'videList']);
+
 }, [ SecurityHeadersMiddleware::class ]);
 
