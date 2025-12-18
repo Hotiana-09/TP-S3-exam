@@ -216,3 +216,38 @@ cond.id_conducteur,cond.nom, cond.prenom, slcond.pourcentage
 FROM taxi_conducteur cond
 LEFT JOIN taxi_salaire_conducteur slcond
 ON cond.id_conducteur = slcond.id_conducteur;
+
+
+CREATE OR REPLACE VIEW taxi_v_course_lib_compl AS
+SELECT
+cs.*, 
+cond.prenom prenom_conducteur, cond.nom nom_conducteur,
+mo.marque, mo.immatriculation, 
+consmo.consommation_par_100km, 
+slcond.date_debut debut_salaire, slcond.date_fin fin_salaire, slcond.pourcentage taux_salaire,
+enmo.date_debut debut_entretien, enmo.date_fin fin_entretien, enmo.pourcentage taux_entretien,
+carb.type type_carburant, carb.prix prix_carburant
+FROM taxi_course cs
+LEFT JOIN taxi_conducteur cond
+ON cond.id_conducteur = cs.id_conducteur
+LEFT JOIN taxi_salaire_conducteur slcond
+ON slcond.id_conducteur = cs.id_conducteur
+LEFT JOIN taxi_moto mo
+ON mo.id_moto = cs.id_moto
+LEFT JOIN taxi_entretien_moto enmo 
+ON enmo.id_moto = mo.id_moto
+LEFT JOIN taxi_consommation_moto consmo 
+ON consmo.id_moto = mo.id_moto
+LEFT JOIN taxi_carburant carb 
+ON carb.id_carburant = mo.id_carburant;
+
+
+SELECT 
+date_course, 
+sum(montant) recette, 
+sum(taux_salaire / 100 * montant) + sum(taux_entretien /100 * montant) depense,
+sum(montant) - (sum(taux_salaire / 100 * montant) + sum(taux_entretien /100 * montant)) benefice
+FROM taxi_v_course_lib_compl
+WHERE (debut_salaire <= date_course AND (fin_salaire IS NULL OR fin_salaire >= date_course))
+AND (debut_entretien <= date_course AND (fin_entretien IS NULL OR fin_entretien >= date_course))
+GROUP BY date_course;
