@@ -175,15 +175,6 @@ Taxi Moto Gestion :
             + mettre le total des recettes , dépenses et bénéfice en haut du tableau
 
         * Base :
-            ✔ Creation view taxi_v_course_lib_compl (Hotiana) @done(25-12-18 05:29)
-                + taxi_course 
-                + taxi_conducteur
-                + taxi_salaire_conducteur
-                + taxi_moto
-                + taxi_entretien_moto
-                + taxi_carburant
-                + taxi_consommation
-
 
 
 
