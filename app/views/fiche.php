@@ -1,35 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails Course #<?= $course['id_course']; ?> - E-commerce</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link href="/assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/bootstrap-icons/bootstrap-icons.min.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                
-            </nav>
-        </div>
-    </header>
-
     <main>
         <div class="container py-4">
-            <!-- En-tête avec bouton retour -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mb-0">
-                    <i class="bi bi-file-text text-primary"></i>
-                    Détails de la course #<?= $course['id_course']; ?>
-                </h2>
-                <a href="/" class="btn btn-outline-secondary">
-                    <i class="bi bi-arrow-left"></i> Retour à la liste
-                </a>
-            </div>
-
             <?php
                 $badge_class = match($course['etat']) {
                     'insere' => 'bg-secondary',
@@ -45,9 +15,17 @@
                 };
             ?>
 
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="btn-group">
+                    <a href="/liste" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Annuler
+                    </a>
+                </div>
+            </div>
+
             <!-- Carte principale -->
             <div class="card shadow mb-4">
-                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <div class="card-header text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
                         <i class="bi bi-info-circle"></i> Informations générales
                     </h5>
@@ -246,10 +224,3 @@
 
         </div>
     </main>
-
-    <footer>
-        <p>&copy; ETU004106 - ETU004132</p>
-    </footer>
-
-</body>
-</html>

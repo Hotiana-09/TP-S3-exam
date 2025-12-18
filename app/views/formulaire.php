@@ -1,58 +1,30 @@
+
     <main>
         <div class="container py-4">
-            <form method="POST" action="/course/update/<?= $course['id_course']; ?>">
+            <form method="POST" action="/insert">
                 <!-- En-tête -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">
-                        <i class="bi bi-pencil-square text-primary"></i>
-                        Modifier la course #<?= $course['id_course']; ?>
-                    </h2>
                     <div class="btn-group">
                         <a href="/" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left"></i> Annuler
                         </a>
-                        <?php if ($course['etat'] !== 'valide'): ?>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-save"></i> Enregistrer
-                            </button>
-                        <?php endif; ?>
                     </div>
                 </div>
 
-                <?php
-                    $badge_class = match($course['etat']) {
-                        'insere' => 'bg-secondary',
-                        'termine' => 'bg-warning text-dark',
-                        'valide' => 'bg-success',
-                        default => 'bg-secondary'
-                    };
-                    $etat_label = match($course['etat']) {
-                        'insere' => 'Insérée',
-                        'termine' => 'Terminée',
-                        'valide' => 'Validée',
-                        default => $course['etat']
-                    };
-                    $isValidated = $course['etat'] === 'valide';
-                ?>
-
-                <?php if ($isValidated): ?>
-                    <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
-                        <i class="bi bi-lock-fill fs-4 me-3"></i>
-                        <div>
-                            <strong>Course validée !</strong> Cette course ne peut plus être modifiée.
-                        </div>
+                <!-- Alert info -->
+                <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                    <i class="bi bi-info-circle-fill fs-4 me-3"></i>
+                    <div>
+                        <strong>Nouvelle course :</strong> Remplissez tous les champs pour enregistrer une nouvelle course.
                     </div>
-                <?php endif; ?>
+                </div>
 
                 <!-- Carte Informations générales -->
                 <div class="card shadow mb-4">
-                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <div class="card-header bg-dark text-white">
                         <h5 class="mb-0">
                             <i class="bi bi-info-circle"></i> Informations générales
                         </h5>
-                        <span class="badge <?= $badge_class ?> fs-6">
-                            <?= $etat_label ?>
-                        </span>
                     </div>
                     <div class="card-body">
                         <div class="row g-4">
@@ -65,22 +37,8 @@
                                        class="form-control form-control-lg" 
                                        id="date_course" 
                                        name="date_course"
-                                       value="<?= $course['date_course']; ?>"
-                                       <?= $isValidated ? 'disabled' : 'required'; ?>>
-                            </div>
-
-                            <!-- État -->
-                            <div class="col-md-6">
-                                <div class="p-3 bg-light rounded">
-                                    <h6 class="text-muted mb-2">
-                                        <i class="bi bi-flag"></i> État de la course
-                                    </h6>
-                                    <p class="fs-5 mb-0">
-                                        <span class="badge <?= $badge_class ?> fs-6">
-                                            <?= $etat_label ?>
-                                        </span>
-                                    </p>
-                                </div>
+                                       value="<?= date('Y-m-d'); ?>"
+                                       required>
                             </div>
 
                             <!-- Distance -->
@@ -92,14 +50,14 @@
                                        class="form-control form-control-lg" 
                                        id="km_effectue" 
                                        name="km_effectue"
-                                       value="<?= $course['km_effectue']; ?>"
+                                       placeholder="Ex: 15.50"
                                        step="0.01"
                                        min="0"
-                                       <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                       required>
                             </div>
 
                             <!-- Montant -->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="montant" class="form-label">
                                     <i class="bi bi-currency-exchange"></i> Montant payé (Ar)
                                 </label>
@@ -107,10 +65,10 @@
                                        class="form-control form-control-lg" 
                                        id="montant" 
                                        name="montant"
-                                       value="<?= $course['montant']; ?>"
+                                       placeholder="Ex: 15000"
                                        step="1"
                                        min="0"
-                                       <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                       required>
                             </div>
                         </div>
                     </div>
@@ -127,16 +85,15 @@
                             </div>
                             <div class="card-body">
                                 <label for="id_conducteur" class="form-label fw-bold">
-                                    Sélectionner un conducteur
+                                    Sélectionner un conducteur <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-select form-select-lg" 
                                         id="id_conducteur" 
                                         name="id_conducteur"
-                                        <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                        required>
                                     <option value="">-- Choisir un conducteur --</option>
                                     <?php foreach($conducteurs as $conducteur): ?>
-                                        <option value="<?= $conducteur['id']; ?>" 
-                                                <?= $course['id_conducteur'] == $conducteur['id'] ? 'selected' : ''; ?>>
+                                        <option value="<?= $conducteur['id']; ?>">
                                             <?= htmlspecialchars($conducteur['nom'] . ' ' . $conducteur['prenom']); ?>
                                             <?php if ($conducteur['pourcentage']): ?>
                                                 - (<?= $conducteur['pourcentage']; ?>%)
@@ -161,16 +118,15 @@
                             </div>
                             <div class="card-body">
                                 <label for="id_moto" class="form-label fw-bold">
-                                    Sélectionner une moto
+                                    Sélectionner une moto <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-select form-select-lg" 
                                         id="id_moto" 
                                         name="id_moto"
-                                        <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                        required>
                                     <option value="">-- Choisir une moto --</option>
                                     <?php foreach($motos as $moto): ?>
-                                        <option value="<?= $moto['id']; ?>" 
-                                                <?= $course['id_moto'] == $moto['id'] ? 'selected' : ''; ?>>
+                                        <option value="<?= $moto['id']; ?>">
                                             <?= htmlspecialchars($moto['marque_moto']); ?> 
                                             - <?= htmlspecialchars($moto['immatriculation']); ?>
                                             <?php if (isset($moto['consommation'])): ?>
@@ -203,25 +159,25 @@
                                         <i class="bi bi-geo-alt-fill"></i> Point de départ
                                     </h6>
                                     <div class="mb-3">
-                                        <label for="lieu_depart" class="form-label">Lieu de départ</label>
+                                        <label for="lieu_depart" class="form-label">
+                                            Lieu de départ <span class="text-danger">*</span>
+                                        </label>
                                         <input type="text" 
                                                class="form-control form-control-lg" 
                                                id="lieu_depart" 
                                                name="lieu_depart"
                                                placeholder="Ex: Analakely"
-                                               value="<?= htmlspecialchars($course['lieu_depart']); ?>"
-                                               <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                               required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="h_depart" class="form-label">
-                                            <i class="bi bi-clock"></i> Heure de départ
+                                            <i class="bi bi-clock"></i> Heure de départ <span class="text-danger">*</span>
                                         </label>
                                         <input type="time" 
                                                class="form-control form-control-lg" 
                                                id="h_depart" 
                                                name="h_depart"
-                                               value="<?= date('H:i', strtotime($course['h_depart'])); ?>"
-                                               <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                               required>
                                     </div>
                                 </div>
                             </div>
@@ -233,25 +189,25 @@
                                         <i class="bi bi-geo-alt-fill"></i> Point d'arrivée
                                     </h6>
                                     <div class="mb-3">
-                                        <label for="lieu_destination" class="form-label">Lieu d'arrivée</label>
+                                        <label for="lieu_destination" class="form-label">
+                                            Lieu d'arrivée <span class="text-danger">*</span>
+                                        </label>
                                         <input type="text" 
                                                class="form-control form-control-lg" 
                                                id="lieu_destination" 
                                                name="lieu_destination"
                                                placeholder="Ex: Ivato"
-                                               value="<?= htmlspecialchars($course['lieu_destination']); ?>"
-                                               <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                               required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="h_arrivee" class="form-label">
-                                            <i class="bi bi-clock-fill"></i> Heure d'arrivée
+                                            <i class="bi bi-clock-fill"></i> Heure d'arrivée <span class="text-danger">*</span>
                                         </label>
                                         <input type="time" 
                                                class="form-control form-control-lg" 
                                                id="h_arrivee" 
                                                name="h_arrivee"
-                                               value="<?= date('H:i', strtotime($course['h_arrivee'])); ?>"
-                                               <?= $isValidated ? 'disabled' : 'required'; ?>>
+                                               required>
                                     </div>
                                 </div>
                             </div>
@@ -265,32 +221,19 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h5 class="mb-1">
-                                    <i class="bi bi-tools"></i> Actions disponibles
+                                    <i class="bi bi-check-circle"></i> Prêt à enregistrer ?
                                 </h5>
                                 <small class="text-muted">
-                                    <?php if (!$isValidated): ?>
-                                        Enregistrez vos modifications ou validez définitivement la course
-                                    <?php else: ?>
-                                        Cette course est validée et ne peut plus être modifiée
-                                    <?php endif; ?>
+                                    Vérifiez que toutes les informations sont correctes avant de soumettre
                                 </small>
                             </div>
                             <div class="btn-group" role="group">
-                                <?php if (!$isValidated): ?>
-                                    <button type="submit" class="btn btn-primary btn-lg">
-                                        <i class="bi bi-save"></i> Enregistrer
-                                    </button>
-                                    
-                                    <a href="/course/valide/<?= $course['id_course']; ?>" 
-                                       class="btn btn-success btn-lg"
-                                       onclick="return confirm('⚠️ Attention !\n\nValider cette course la rendra définitive et non modifiable.\n\nÊtes-vous sûr de vouloir continuer ?')">
-                                        <i class="bi bi-check-circle"></i> Valider définitivement
-                                    </a>
-                                <?php else: ?>
-                                    <button class="btn btn-success btn-lg" disabled>
-                                        <i class="bi bi-check-circle-fill"></i> Course validée
-                                    </button>
-                                <?php endif; ?>
+                                <a href="/" class="btn btn-secondary btn-lg">
+                                    <i class="bi bi-x-circle"></i> Annuler
+                                </a>
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="bi bi-save"></i> Enregistrer la course
+                                </button>
                             </div>
                         </div>
                     </div>
