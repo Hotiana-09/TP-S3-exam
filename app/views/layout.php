@@ -25,6 +25,9 @@
                     <a href="/liste" class="btn btn-light btn-lg">
                         <i class="bi bi-card-checklist"></i> List
                     </a>
+                    <a href="/finance" class="btn btn-light btn-lg">
+                        <i class="bi bi-coin"></i> Finance 
+                    </a>
                     <a href="/create" class="btn btn-success btn-lg">
                         <i class="bi bi-plus-circle"></i> Nouvelle Course
                     </a>
